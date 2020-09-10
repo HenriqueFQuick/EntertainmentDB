@@ -1,17 +1,18 @@
 const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 
-const TestController = require('./controllers/TestController');
-
 const routes = express.Router();
 
-routes.get('/testeGet', TestController.index)
+const AuthController = require('./controllers/AuthController');
 
-routes.post('/testePost', celebrate({
+
+routes.post('/register',celebrate({
     [Segments.BODY]:Joi.object().keys({
-        movie: Joi.string().required(),
-        actor: Joi.string().required()
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.required(),
+        createdAt: Joi.date()
     })
-}) ,TestController.index)
+}) , AuthController.create);
 
 module.exports = routes
