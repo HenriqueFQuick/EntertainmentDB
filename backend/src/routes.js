@@ -4,6 +4,9 @@ const { celebrate, Segments, Joi } = require('celebrate');
 const routes = express.Router();
 
 const AuthController = require('./controllers/AuthController');
+const projectController = require('./controllers/ProjectController');
+
+const authMiddleware = require('./middlewares/auth')
 
 
 routes.post('/register',celebrate({
@@ -14,5 +17,14 @@ routes.post('/register',celebrate({
         createdAt: Joi.date()
     })
 }) , AuthController.create);
+
+routes.post('/authenticate', AuthController.authenticate)
+
+
+
+
+//ROTAS PARA TESTES INICIAIS
+routes.get('/teste', authMiddleware, projectController.index)
+routes.get('/index', AuthController.index)
 
 module.exports = routes
