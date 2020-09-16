@@ -3,10 +3,10 @@ const { celebrate, Segments, Joi } = require('celebrate');
 
 const routes = express.Router();
 
-const AuthController = require('./controllers/AuthController');
-const projectController = require('./controllers/ProjectController');
+const AuthController = require('./app/controllers/AuthController');
+const projectController = require('./app/controllers/ProjectController');
 
-const authMiddleware = require('./middlewares/auth')
+const authMiddleware = require('./app/middlewares/auth')
 
 
 routes.post('/register',celebrate({
@@ -20,6 +20,9 @@ routes.post('/register',celebrate({
 
 routes.post('/authenticate', AuthController.authenticate)
 
+routes.post('/forgot_password', AuthController.forgotPassword)
+
+routes.post('/reset_password', AuthController.resetPassword)
 
 
 
