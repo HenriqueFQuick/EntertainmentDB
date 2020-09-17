@@ -110,7 +110,6 @@ module.exports = {
             return res.send();
 
         }catch(err){
-            console.log(err)
             res.status(400).send({error: 'Error on reset password. Try Again', detail: err})
         }
 
